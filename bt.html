@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    console.time('Linear');
+    function checkNumbersByLinear() {
+         let count = 0;
+         for (let i = 0; i < arr.length; i++) {
+             if (arr[i] === number) {
+                 count++;
+            }
+         }
+         return count;
+     }
+    console.timeEnd('Linear');
+
+
+    console.time('Binary');
+    let checkNumberByBinary = function (arr, number, start, end) {
+        if (start > end) return false;
+        let mid = Math.floor((start + end) / 2);
+        if (arr[mid] === number) return true;
+        if (arr[mid] > number) return checkNumberByBinary(arr, number, start, mid - 1);
+        else return checkNumberByBinary(arr, number, mid + 1, end);
+    };
+    console.timeEnd('Binary');
+
+    let arr = new Array();
+    let n = parseInt(prompt("Enter length of the array :"));
+    for (let i = 0; i < n; i++) {
+        arr[i] = parseInt(prompt("Enter number :"));
+    }
+    let number = parseInt(prompt("Enter a number for check :"));
+
+    if (checkNumberByBinary(arr, number, 0, n - 1))
+        alert(number + " is in array");
+    else alert(number + " is not in array");
+
+     let result = checkNumbersByLinear();
+     if (result !== 0)
+         alert(number + " is in array");
+     else alert(number + " is not in array");
+</script>
+</body>
+</html>
